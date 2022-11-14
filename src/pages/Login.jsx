@@ -44,7 +44,8 @@ function Login() {
     <LoginContainer>
       <LoginForm>
         {LoginFormData.map((data) => (
-          <InputInfo data={data} handleChange={(e) => handleChange(e)} />
+          // key={} 값이 없어서 콘솔 경고뜸
+          <InputInfo key={data.name} data={data} handleChange={(e) => handleChange(e)} />
         ))}
         <ErrorText>{error}</ErrorText>
         <SubmitBtn onClick={handleSubmit} value={values.userId}>
