@@ -1,0 +1,43 @@
+{
+    "board":[
+        {
+            "id":1,
+            "writer": "2018250033",
+            "title": "학교가자",
+            "startProvince": "경기도",
+            "startCity": "안성",
+            "start": "한경대 정문",
+            "arrivalProvince": "경기도",
+            "arrivalCity": "평택",
+            "arrival": "평택역",
+            "date": "20221115",
+            "time": "13:30,"
+        },
+        {
+            "id":2,
+            "writer": "2018250033",
+            "title": "학교가자",
+            "startProvince": "경기도",
+            "startCity": "평택",
+            "start": "평택역",
+            "arrivalProvince": "경기도",
+            "arrivalCity": "안성",
+            "arrival": "한경대 정문",
+            "date": "20221117",
+            "time": "17:30,"
+        },
+        {
+            "id":3,
+            "writer": "2018250033",
+            "title": "학교가자",
+            "startProvince": "강원도",
+            "startCity": "원주",
+            "start": "원주시청",
+            "arrivalProvince": "경기도",
+            "arrivalCity": "안성",
+            "arrival": "한경대 정문",
+            "date": "20221117",
+            "time": "17:30,"
+        }
+    ]
+}
