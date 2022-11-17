@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"; 
 import { useState } from "react";
 
-import InputInfo from "../components/InputInfo";
+import LoginInput from "../components/login/LoginInput";
 
 function Login() {
   const navigate = useNavigate();
@@ -34,6 +34,8 @@ function Login() {
     const isValidate = values.userId === "testId" && values.password === "testPw" ? true : false;
     // const isValidate = axios ~ 사용하여 백엔드 APi 연결.
     if (isValidate) {
+      // 로컬스토리지를 사용해서 로그인 후에 페이지를 닫았다가 켜도 로그인상태가 유지 됨.
+      window.localStorage.setItem("currentUserId", "user1");
       navigate("/");
     } else {
       setError("ID 또는 PW가 올바르지 않습니다.");
@@ -44,7 +46,8 @@ function Login() {
     <LoginContainer>
       <LoginForm>
         {LoginFormData.map((data) => (
-          <InputInfo data={data} handleChange={(e) => handleChange(e)} />
+          // key={} 값이 없어서 콘솔 경고뜸
+          <LoginInput key={data.name} data={data} handleChange={(e) => handleChange(e)} />
         ))}
         <ErrorText>{error}</ErrorText>
         <SubmitBtn onClick={handleSubmit} value={values.userId}>
@@ -58,7 +61,6 @@ function Login() {
     </LoginContainer>
   );
 }
-
 const ErrorText = styled.p`
   font-style: normal;
   font-weight: 300;
@@ -99,6 +101,7 @@ const SubmitBtn = styled.button`
   font-weight: 500;
   font-size: 17px;
   letter-spacing: 0.03em;
+  
 `;
 
 const LoginContainer = styled.div.attrs({ className: "SignUp" })`
@@ -109,7 +112,7 @@ const LoginContainer = styled.div.attrs({ className: "SignUp" })`
 `;
 
 const LoginForm = styled.div`
-  width: 50%;
+  width: 55%;
   margin: auto;
   text-align: center;
   font-style: normal;
