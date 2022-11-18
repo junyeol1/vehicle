@@ -24,8 +24,11 @@ function Carpool(){
 		.then(data=>{
 			setBoards(data);
 		})
+    },[url])
         
+    useEffect(()=>{
         // 전체 게시글 정보를 검색 컴포넌트로 넘기기 위해
+        // select 문을 변결할 때마다 검색 select에 나오는 옵션을 알맞게 변경시켜주기 위해선 이부분 수정이 필요함
         fetch("http://localhost:3001/board")
         .then(res=>{
             return res.json();
@@ -33,7 +36,7 @@ function Carpool(){
         .then(data=>{
             setToSearch(data);
         })
-    },[url])
+    },[])
     
     //검색 주소를 콘솔에 출력
     console.log(toSearch);
@@ -46,11 +49,11 @@ function Carpool(){
         <SearchWrapper>
             <Search keywords={toSearch} parentFunction={getURL}></Search>
         </SearchWrapper>
-        <ul>
+        <BoardLsit>
             {boards.map(board=>(
                 (<Thumbnail key={board.id} info={board} />)
             ))}
-        </ul>
+        </BoardLsit>
     </>;
 }
 
@@ -63,6 +66,10 @@ const Posting = styled.div`
     display: block
     margin: 10px;
     width: 50px;
+`
+
+const BoardLsit = styled.ul`
+    list-style: none;
 `
 
 export default Carpool;

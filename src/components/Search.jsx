@@ -46,13 +46,18 @@ function Search(props){
         scRef.current.value="";
         apRef.current.value="";
         acRef.current.value="";
+        getURL('http://localhost:3001/board');
+    }
+
+    const selectChange = (e) =>{
+        // select가 변결될 때마다 옵션 항목을 변경하기 위해 여기에 뭘 작성해야 할걱타음
     }
 
     return <>
     <SearchFormWrapper>
         <form onSubmit={onSubmit}>
             <span>출발지</span>
-            <select ref={spRef} name="sp">
+            <select ref={spRef} name="sp" onChange={selectChange}>
                 <option value={""}>선택 안함</option>
                 {setSP.map(sp => {
                     return <option key={sp} value={sp}>
