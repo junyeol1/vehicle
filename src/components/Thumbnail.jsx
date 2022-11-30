@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 function Thumbnail(props){
-    // 굳이 State 안써도 될 거같기도 하다
-    const [info, setInfo] = useState(props.info);
+    const info = props.info;
 
     return <li>
         <LinkWrapper>
