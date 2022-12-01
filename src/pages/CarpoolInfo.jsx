@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import axios from "axios";
 import PassengerList from "../components/PassengerList";
 
@@ -20,6 +20,8 @@ function CarpoolInfo(){
     const userId = '2018250033'; // 임시 사용 // 게시글 작성자 역할
     // const userId = '2018250233'; // 임시 사용 // 외부인 역할 - 동승신청 클릭
     // const userId = '2022330044'; // 임시 사용 // 동승자 역할
+
+    const nevigate = useNavigate();
 
     useEffect(()=>{        
         // 게시글 정보 받아오기
@@ -84,10 +86,21 @@ function CarpoolInfo(){
 	})
     }
 
-    // 게시글 삭제 버튼
+    // 게시글에 달린 모든 동승자 삭제
+    const delAllPassenger = (boardId) =>{
+        passengerList.forEach(passenger=>{
+            fetch(`http://localhost:3001/board/${boardId+passenger.userId}`, {method:"DELETE"})
+            .then(res=>{
+                if(res.ok){
+                    console.log("동승 신청 삭제 함");
+                }
+            })
+        })
+    }
+
+    // 게시글 삭제 
     const delBoard = (e) =>{
         // 지금 여기서 삭제 해야할게 게시글 + 게시글에 달려있는 동승자 목록이라 어케 해야할 지 고민
-        e.preventDefault();
         fetch(`http://localhost:3001/board/${boardId}`, {method:"DELETE"})
         .then(res=>{
             if(res.ok){
@@ -102,10 +115,14 @@ function CarpoolInfo(){
         <div>
             {/* 로그인 된 id가 writer(게시글 작성자)id와 같다면 게시글에 대한 삭제 수정버튼 보이고 아니면 null */}
             {userCase === 1 ? <div>
-                {/* <button onClick={deletBoard}>삭제</button>
-                <button onClick={updateBoard}>수정</button> */}
-                <button onClick={delBoard}>삭제</button>
-                <button>수정</button>
+                <button onClick={()=>{
+                    delAllPassenger(); // 모든 동승자 삭제
+                    delBoard(); // 게시글 삭제
+                    }}>삭제</button>
+                <button onClick={()=>{
+                    // delBoard(); // 게시글 삭제, 동승자들은 그대로 놔두고...? 아님 그냥 put 요청 사용?
+                    // nevigate("/carpool/update");// 게시글 아이디를 그대로 가지고 정보 바꾸기가 가능한가?
+                }}>수정</button>
                 </div>:
                 null
             }
@@ -118,7 +135,7 @@ function CarpoolInfo(){
         <div>usercase: {userCase}</div>
         <div>passengerlist: {typeof passengerList}</div>
 
-        <hr/> {/* 글과 댓글 구분선 */}
+        <hr/> {/* 글과 댓글 구분선, 의미없음 */}
         <ul>
             {/*동승 신청 목록 보여주는 곳: 여기서 댓글 수정, 삭제 도 추가 해야함*/}
             {passengerList.map(passenger=>{
@@ -132,7 +149,7 @@ function CarpoolInfo(){
         </ul>
             {/* 동승 신청 버튼: 외부인 일 경우에만 버튼이 보임*/}
             {userCase === 3? <button disabled={
-                passengerList.length < 3 ? "" : "disable" // 3은 임의의 숫자, info.maxPassenger
+                passengerList.length < 3 ? "" : "disable" // 3은 임의의 숫자, info.maxPassenger // 최대 동승 인원이면 버튼 비활성화
             } onClick={addPassenger}>동승 신청</button>: null}
     </>;
 }
