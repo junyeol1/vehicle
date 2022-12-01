@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   const menuList = [
     { title: "메인", src: "/" },
-    { title: "카풀", src: "/carPool" },
+    { title: "카풀", src: "/CarPool" },
     { title: "택시", src: "/Taxi" },
     { title: "내정보", src: "/myInfo" },
   ];

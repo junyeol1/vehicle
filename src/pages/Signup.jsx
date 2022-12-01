@@ -111,14 +111,20 @@ function Signup() {
       <Title>회원가입</Title>
       <SignUpForm>
         {SignUpFormData.map((data) => (
-          <SignUpInput key={data.name} data={data} setValues={setValues} values={values} setErrors={setErrors} />
+          <SignUpInput
+            key={data.name}
+            data={data}
+            setValues={setValues}
+            values={values}
+            setErrors={setErrors}
+          />
         ))}
         <GenderContainer>
           <Gender>성별</Gender>
-          <GenderOption type="radio" name="gender" value="남자" id="male" defaultchecked />
-          <GenderLabel htmlfor="male">남자</GenderLabel>
+          <GenderOption type="radio" name="gender" value="남자" id="male" checked />
+          <GenderLabel for="male">남자</GenderLabel>
           <GenderOption type="radio" name="gender" value="여자" id="female" />
-          <GenderLabel htmlfor="female">여자</GenderLabel>
+          <GenderLabel for="female">여자</GenderLabel>
         </GenderContainer>
 
         <SubmitBtn disabled={!isFill} onClick={handleSubmit} value={isFill}>
@@ -152,7 +158,7 @@ const GenderOption = styled.input`
 `;
 const Title = styled.div`
   width: 100%;
-  background-color: #FF9C2C;
+  background-color: #ff9c2c;
   font-size: 18px;
   text-align: center;
   font-weight: 600;
@@ -183,7 +189,7 @@ const SignUpContainer = styled.div.attrs({ className: "SignUp" })`
   display: flex;
   flex-direction: column;
   height: 640px;
-  background-color: #2D2D92;
+  background-color: #2d2d92;
   font-family: "Pretended";
   color: white;
 `;

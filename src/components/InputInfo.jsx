@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-function InputInfo({ data: { placeholder, name, type }, handleChange }) {
+function InputInfo({ placeholder = "", title, handleChange, rows }) {
   return (
     <InputWrapper>
-      <Input type={type} placeholder={placeholder} name={name} onChange={handleChange} />
+      <Title>{title}</Title>
+      <Input rows={rows} placeholder={placeholder} onChange={handleChange} />
     </InputWrapper>
   );
 }
@@ -12,14 +13,20 @@ const InputWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const Input = styled.input`
+const Title = styled.p`
+  color: white;
+  margin-bottom: 0px;
+`;
+const Input = styled.textarea`
   width: 100%;
-  padding: 15px;
+  height: auto;
+
+  padding: 0px;
   outline: 0;
-  border: 1px #d7d7d7 solid;
-  border-radius: 4px;
+  /* border: 1px #d7d7d7 solid; */
+  /* border-radius: 4px; */
   box-sizing: border-box;
-  color: #6a6a6a;
+  color: black;
   font-weight: 400;
   font-size: 16px;
   letter-spacing: -0.01em;
